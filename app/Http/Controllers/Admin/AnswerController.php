@@ -40,7 +40,9 @@ class AnswerController extends Controller
         $store ->answer = $request->answer;
         $store ->description = $request->description;
         $store ->save();
-        dd($request);
+        $answer = Answer::all();
+        return response($answer);
+        // dd($request);
     }
 
     /**

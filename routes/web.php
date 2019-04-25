@@ -45,4 +45,5 @@ Route::resource('question', 'Admin\QuestionController');
 // Route::get('question/edit/{id}','Admin\QuestionController@edits')->name('question.edit');
 
 Route::resource('answer', 'Admin\AnswerController');
+
 Route::post('/answerstore', 'Admin\AnswerController@store');

@@ -6,6 +6,7 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Answer;
+use App\AnswerQuestion;
 
 class QuestionController extends Controller
 {
@@ -104,11 +105,23 @@ class QuestionController extends Controller
         // dd($question);
         $question ->save();
         if($request->answer)
+
         {
-            foreach($request->answer as $answer){
-                $question->answers()->attach($answer);
+
+            if($question->answers()->first()->exists()){
+                AnswerQuestion::first()->delete();
+                    foreach($request->answer as $answer){
+                    $question->answers()->attach($answer);
+                }
+
+            }
+            if($question->answers()==null){
+                foreach($request->answer as $answer){
+                    $question->answers()->attach($answer);
+                }
             }
         }
+
         return redirect()->route('question.index');
     }
 
